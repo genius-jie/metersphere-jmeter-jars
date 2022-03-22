@@ -1,4 +1,5 @@
 import com.zlj.utils.HttpClientUtil;
+import com.zlj.utils.ParseResultUtil;
 import lombok.SneakyThrows;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.http.HttpResponse;
@@ -25,8 +26,7 @@ public class HttpClientUtilTest {
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
         headers.put("Cache-Control", "no-cache");
-        HashMap<String, String> querys = new HashMap<String, String>();
-        HttpResponse content = HttpClientUtil.doPost("https://10.1.40.81:7508", "/tenant/api/v1/user/login", headers, querys, body);
+        HttpResponse content = HttpClientUtil.doPost("https://10.1.40.81:7508", "/tenant/api/v1/user/login", headers, null, body);
         String result = EntityUtils.toString(content.getEntity(), "UTF-8");
         JSONObject jsonObject = new JSONObject(result);
         String token = jsonObject.getJSONObject("data").get("token").toString();
@@ -61,13 +61,8 @@ public class HttpClientUtilTest {
         if (response.getStatusLine().getStatusCode() == 200) {
             String content = EntityUtils.toString(response.getEntity(), "UTF-8");
             String cookie = response.getLastHeader("Set-Cookie").getValue();
-
-            Pattern pattern = Pattern.compile("omp_token=(.*?);");
-            Matcher matcher = pattern.matcher(cookie);
-            if (matcher.find()) {
-                String str = matcher.group(1);
-                System.out.println(str);
-            }
+            String result = ParseResultUtil.parseByRegx(cookie, "omp_token=(.*?);");
+            System.out.println(result);
         }
     }
 }
