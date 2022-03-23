@@ -10,14 +10,23 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class LinuxsshUtill {
-    public static String exeCommand(String host, int port, String user, String password, String command) throws JSchException, IOException {
+    public static LinuxsshServer bulidServer(String host, int port, String user, String password) throws JSchException {
+        return new LinuxsshUtill.LinuxsshServer(host, port, user, password);
+    }
+
+    public static class LinuxsshServer {
+        Session session = null;
+
+        private LinuxsshServer(String host, int port, String user, String password) throws JSchException {
             JSch jsch = new JSch();
-            Session session = jsch.getSession(user, host, port);
+            session = jsch.getSession(user, host, port);
             session.setConfig("StrictHostKeyChecking", "no");
-            //    java.util.Properties config = new java.util.Properties();
-            //   config.put("StrictHostKeyChecking", "no");
             session.setPassword(password);
             session.connect();
+        }
+
+        public String exeCommand(String command) throws JSchException, IOException {
+
             ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
             InputStream in = channelExec.getInputStream();
             channelExec.setCommand(command);
@@ -28,4 +37,5 @@ public class LinuxsshUtill {
             session.disconnect();
             return out;
         }
+    }
 }

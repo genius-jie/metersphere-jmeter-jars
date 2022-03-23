@@ -32,12 +32,11 @@ import java.util.Map;
 
 /**
  * 基于 httpclient 4.5版本的 http工具类
- *
  */
 public class HttpClientUtil {
-    public static HttpResponse doGet(String host, String path, String method, Map<String, String> headers,
-                                     Map<String, String> querys)
-            throws Exception {
+
+
+    public static HttpResponse doGet(String host, String path, String method, Map<String, String> headers, Map<String, String> querys) throws Exception {
         HttpClient httpClient = wrapClient(host);
         HttpGet request = new HttpGet(buildUrl(host, path, querys));
         for (Map.Entry<String, String> e : headers.entrySet()) {
@@ -53,12 +52,11 @@ public class HttpClientUtil {
      * @param path
      * @param headers
      * @param querys
-     * @param bodys
-     * HashMap<String, String> bodys = new HashMap<String, String>();
-     * bodys.put("email","admin");
-     * bodys.put("passwd","Admin@123");
-     * bodys.put("tenantId","e10adc3949ba59abbe56e057f20f88dd");
-     * bodys.put("tenantStrategy","2");
+     * @param bodys   HashMap<String, String> bodys = new HashMap<String, String>();
+     *                bodys.put("email","admin");
+     *                bodys.put("passwd","Admin@123");
+     *                bodys.put("tenantId","e10adc3949ba59abbe56e057f20f88dd");
+     *                bodys.put("tenantStrategy","2");
      * @return
      * @throws Exception
      */
@@ -283,4 +281,6 @@ public class HttpClientUtil {
             throw new RuntimeException(ex);
         }
     }
+
+
 }

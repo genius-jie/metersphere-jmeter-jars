@@ -1,5 +1,7 @@
+package com.zlj.utils;
+
 import com.zlj.utils.HttpClientUtil;
-import com.zlj.utils.ParseResultUtil;
+import com.zlj.utils.HttpResultParseUtil;
 import lombok.SneakyThrows;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.http.HttpResponse;
@@ -15,8 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class HttpClientUtilTest {
     @SneakyThrows
@@ -61,7 +61,7 @@ public class HttpClientUtilTest {
         if (response.getStatusLine().getStatusCode() == 200) {
             String content = EntityUtils.toString(response.getEntity(), "UTF-8");
             String cookie = response.getLastHeader("Set-Cookie").getValue();
-            String result = ParseResultUtil.parseByRegx(cookie, "omp_token=(.*?);");
+            String result = HttpResultParseUtil.parseByRegx(cookie, "omp_token=(.*?);");
             System.out.println(result);
         }
     }

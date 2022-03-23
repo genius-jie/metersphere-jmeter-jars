@@ -68,6 +68,19 @@
             <artifactId>kafka-clients</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <!--MONGODB工具类-->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.8.2</version>
+        </dependency>
+        <!--达梦数据库-->
+        <dependency>
+            <groupId>com.dameng</groupId>
+            <artifactId>DmJdbcDriver18</artifactId>
+            <version>8.1.2.79</version>
+        </dependency>
+
 
     </dependencies>
 </project>
