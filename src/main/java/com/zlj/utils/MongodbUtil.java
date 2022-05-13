@@ -9,23 +9,25 @@ import org.bson.Document;
 import java.util.Map;
 
 public class MongodbUtil {
-    public static MongodbServer builder(String url, String databaseName, String collectionName) {
-        return new MongodbServer(url, databaseName, collectionName);
+    private static MongodbUtil mongodbUtil;
+    private static MongoCollection collection ;
+    private static MongoClient mongoClient ;
+    private static MongoDatabase database;
+    private MongodbUtil() {
     }
 
-    public static class MongodbServer {
-        MongoCollection collection = null;
-
-        private MongodbServer(String url, String databaseName, String collectionName) {
-            MongoClient mongoClient = MongoClients.create(url);
-            MongoDatabase database = mongoClient.getDatabase(databaseName);
-            collection = database.getCollection(collectionName);
-        }
-
-        public void sendMsg(Map<String, Object> valueMap) {
-            Document document = new Document(valueMap);
-            collection.insertOne(document);
-        }
+    public static synchronized  MongodbUtil getInstance(String url, String databaseName, String collectionName) {
+        mongoClient = MongoClients.create(url);
+        database = mongoClient.getDatabase(databaseName);
+        collection = database.getCollection(collectionName);
+        mongodbUtil=new MongodbUtil();
+        return mongodbUtil;
     }
+
+    public void sendMsg(Map<String, Object> valueMap) {
+        Document document = new Document(valueMap);
+        collection.insertOne(document);
+    }
+
 
 }

@@ -1,6 +1,5 @@
 package com.zlj.utils;
 
-import com.zlj.utils.DamenClientUtil.DamenServer;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,20 +8,20 @@ import java.util.Map;
 class DamenClientUtilTest {
     @Test
     public void DamenSelectTest() {
-        DamenServer damenServer = DamenClientUtil.build("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
+        DamenClientUtil damenServer =  DamenClientUtil.getInstance("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
         List<Map<String, String>> result = damenServer.select("select * from t1");
         System.out.println(result.size());
     }
 
     @Test
     public void DamenInsert() {
-        DamenServer damenServer = DamenClientUtil.build("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
+        DamenClientUtil damenServer = DamenClientUtil.getInstance("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
         damenServer.insertOrUpdate("INSERT INTO t1(T_NAME,T_PRICE,T_DATE,T_Time) VALUES(concat('wang',1250)  ,CAST(1 as decimal(9,2)),CAST(NOW()  as DATE),DATEADD(n,1,sysdate-1));");
     }
 
     @Test
     public void DamenInsert2() {
-        DamenServer damenServer = DamenClientUtil.build("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
+        DamenClientUtil damenServer = DamenClientUtil.getInstance("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
         /*调用存储过程*/
         damenServer.insertBycall("BEGIN\n" +
                 "FOR v_count IN 101..110 Loop\n" +
@@ -36,13 +35,13 @@ class DamenClientUtilTest {
 
     @Test
     public void DamenUpdate() {
-        DamenServer damenServer = DamenClientUtil.build("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
+        DamenClientUtil damenServer = DamenClientUtil.getInstance("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
         damenServer.insertOrUpdate("update t1 set T_NAME='787878' where T_NAME='wang1250';");
     }
 
     @Test
       public void DamenDelete() {
-          DamenServer damenServer = DamenClientUtil.build("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
+        DamenClientUtil damenServer = DamenClientUtil.getInstance("dm.jdbc.driver.DmDriver", "jdbc:dm://10.1.56.68:5236/DAMENG?allowMultiQueries=true", "SYSDBA", "SYSDBA");
           damenServer.delete("delete from t1 where T_NAME='787878';");
       }
 

@@ -1,7 +1,5 @@
 package com.zlj.utils;
 
-import com.zlj.utils.HttpClientUtil;
-import com.zlj.utils.HttpResultParseUtil;
 import lombok.SneakyThrows;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.http.HttpResponse;
@@ -18,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.net.URI;
 import java.util.HashMap;
 
-public class HttpClientUtilTest {
+ class HttpClientUtilTest {
     @SneakyThrows
     @Test
     public void test1() {
