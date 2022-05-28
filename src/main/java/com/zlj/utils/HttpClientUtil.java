@@ -36,9 +36,9 @@ import java.util.Map;
 public class HttpClientUtil {
 
 
-    public static HttpResponse doGet(String host, String path, String method, Map<String, String> headers, Map<String, String> querys) throws Exception {
+    public static HttpResponse doGet(String host, String path, Map<String, String> headers) throws Exception {
         HttpClient httpClient = wrapClient(host);
-        HttpGet request = new HttpGet(buildUrl(host, path, querys));
+        HttpGet request = new HttpGet(buildUrl(host, path, null));
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
@@ -51,7 +51,6 @@ public class HttpClientUtil {
      * @param host
      * @param path
      * @param headers
-     * @param querys
      * @param bodys   HashMap<String, String> bodys = new HashMap<String, String>();
      *                bodys.put("email","admin");
      *                bodys.put("passwd","Admin@123");
@@ -62,11 +61,10 @@ public class HttpClientUtil {
      */
     public static HttpResponse doPost(String host, String path,
                                       Map<String, String> headers,
-                                      Map<String, String> querys,
                                       Map<String, String> bodys)
             throws Exception {
         HttpClient httpClient = wrapClient(host);
-        HttpPost request = new HttpPost(buildUrl(host, path, querys));
+        HttpPost request = new HttpPost(buildUrl(host, path, null));
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
@@ -88,18 +86,16 @@ public class HttpClientUtil {
      * @param host
      * @param path
      * @param headers
-     * @param querys
      * @param body
      * @return
      * @throws Exception
      */
     public static HttpResponse doPost(String host, String path,
                                       Map<String, String> headers,
-                                      Map<String, String> querys,
                                       String body)
             throws Exception {
         HttpClient httpClient = wrapClient(host);
-        HttpPost request = new HttpPost(buildUrl(host, path, querys));
+        HttpPost request = new HttpPost(buildUrl(host, path, null));
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }
@@ -114,20 +110,19 @@ public class HttpClientUtil {
      *
      * @param host
      * @param path
-     * @param method
      * @param headers
-     * @param querys
+
      * @param body
      * @return
      * @throws Exception
      */
-    public static HttpResponse doPost(String host, String path, String method,
+    public static HttpResponse doPost(String host, String path,
                                       Map<String, String> headers,
-                                      Map<String, String> querys,
+
                                       byte[] body)
             throws Exception {
         HttpClient httpClient = wrapClient(host);
-        HttpPost request = new HttpPost(buildUrl(host, path, querys));
+        HttpPost request = new HttpPost(buildUrl(host, path, null));
         for (Map.Entry<String, String> e : headers.entrySet()) {
             request.addHeader(e.getKey(), e.getValue());
         }

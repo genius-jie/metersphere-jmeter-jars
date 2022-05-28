@@ -80,6 +80,11 @@
             <artifactId>DmJdbcDriver18</artifactId>
             <version>8.1.2.79</version>
         </dependency>
+        <dependency>
+        	<groupId>ru.yandex.clickhouse</groupId>
+        	<artifactId>clickhouse-jdbc</artifactId>
+        	<version>0.1.52</version>
+        </dependency>
 
 
     </dependencies>
@@ -109,6 +114,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
             </plugin>
 
         </plugins>
