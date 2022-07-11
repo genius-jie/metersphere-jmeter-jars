@@ -7,14 +7,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 class InfluxDbUtilTest {
-
+    private static String openurl = "http://10.1.53.65:8086";//连接地址
+    private static String username = "zxj2";//用户名
+    private static String password = "zh123456";//密码
+    private static String database = "Databank";//数据库
     @Test
     void query() {
     }
 
     @Test
     void insert() {
-        InfluxDbUtil influxDB = InfluxDbUtil.setUp();
+        InfluxDbUtil influxDB = InfluxDbUtil.getInstance(username, password, openurl, database);
 
         Map<String, String> tags = new HashMap<>();
         Map<String, Object> fields = new HashMap<>();
