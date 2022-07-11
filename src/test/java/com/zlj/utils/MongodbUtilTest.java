@@ -3,15 +3,14 @@ package com.zlj.utils;
 import org.bson.Document;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 class MongodbUtilTest {
     @Test
     public void insertTest() {
         Map<String, Object> map = new HashMap<String, Object>();
+
         map.put("id", 1);
         map.put("name", "java");
         map.put("age", 1);
@@ -46,4 +45,5 @@ class MongodbUtilTest {
             System.out.println(document);
         }
     }
+
 }

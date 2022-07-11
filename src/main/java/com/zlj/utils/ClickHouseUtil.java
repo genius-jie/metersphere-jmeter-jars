@@ -25,6 +25,7 @@ public class ClickHouseUtil {
         try {
             Class.forName(driverName);
             clickHouseUtil.conn = DriverManager.getConnection(url, user, password);
+
         } catch (Exception e) {
             System.out.println("connection fail ,please check your entities");
         }
@@ -60,7 +61,8 @@ public class ClickHouseUtil {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            close(pst, conn);
+            //关闭下次就不能调用了
+//            close(pst, conn);
         }
 
         return b;
@@ -79,7 +81,7 @@ public class ClickHouseUtil {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            close(pst, conn);
+//            close(pst, conn);
         }
 
         return b;
@@ -98,7 +100,7 @@ public class ClickHouseUtil {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            close(rst, pst, conn);
+//            close(rst, pst, conn);
         }
         return rst;
     }
