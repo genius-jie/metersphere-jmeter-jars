@@ -24,13 +24,14 @@ public class InfluxDbUtil {
     private String measurement;//表名
     private static InfluxDB influxDB;
 
-    private InfluxDbUtil(String username, String password, String openurl, String database) {
+    private InfluxDbUtil(String database) {
+
         this.database = database;
     }
 
     public static InfluxDbUtil getInstance(String username, String password, String openurl, String database) {
 //创建 连接
-        InfluxDbUtil influxDbUtil = new InfluxDbUtil(username, password, openurl, database);
+        InfluxDbUtil influxDbUtil = new InfluxDbUtil(database);
         if (influxDB == null) {
             influxDB = InfluxDBFactory.connect(openurl, username, password);
             influxDB.createDatabase(database);
